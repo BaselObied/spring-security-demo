@@ -17,6 +17,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class UserResourceSecurityTest {
 
+    public static final String ADMIN_KEY = "admin-key";
+    public static final String ANY_KEY = "any-key";
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -28,13 +31,13 @@ public class UserResourceSecurityTest {
         @Test
         void shouldReturnOk_whenUserKeyAllowed() throws Exception {
             mockMvc.perform(get("/api/users")
-                    .header("Authorization", "admin-key")).andExpect(status().isOk());
+                    .header("Authorization", ADMIN_KEY)).andExpect(status().isOk());
         }
 
         @Test
         void shouldReturnUnauthorized_whenUserKeyIsNotAllowed() throws Exception {
             mockMvc.perform(get("/api/users")
-                    .header("Authorization", "invalid-key")).andExpect(status().isUnauthorized());
+                    .header("Authorization", ANY_KEY)).andExpect(status().isUnauthorized());
         }
 
         @Test
@@ -43,6 +46,16 @@ public class UserResourceSecurityTest {
         }
     }
 
+    @Nested
+    class AuthorizeUserTest {
+
+        @Test
+        void findUsers_shouldReturnForbidden_whenUserIsNotAdmin() throws Exception {
+            mockMvc.perform(
+                    get("/api/users").header("Authorization", "user-key")
+            ).andExpect(status().isForbidden());
+        }
+    }
 
 }
 

@@ -1,6 +1,8 @@
 package com.fawry.springsecuritydemo.resource;
 
 import com.fawry.springsecuritydemo.common.annotation.Authenticate;
+import com.fawry.springsecuritydemo.common.annotation.RequireRole;
+import com.fawry.springsecuritydemo.model.enumeration.Role;
 import com.fawry.springsecuritydemo.service.UserService;
 import com.fawry.springsecuritydemo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ public class UserResource {
 
     @GetMapping
     @Authenticate
+    @RequireRole(value = Role.ADMIN)
     public List<User> findAllUsers() {
         return userService.getUsers();
     }
