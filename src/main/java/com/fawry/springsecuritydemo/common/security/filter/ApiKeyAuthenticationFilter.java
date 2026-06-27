@@ -1,6 +1,5 @@
 package com.fawry.springsecuritydemo.common.security.filter;
 
-import com.fawry.springsecuritydemo.common.exception.AuthenticationException;
 import com.fawry.springsecuritydemo.common.security.authentication.model.ApiKeyAuthentication;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -9,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;

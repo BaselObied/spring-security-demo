@@ -15,3 +15,7 @@ logging:
       springframework:
         security: DEBUG
 
+
+auth:
+  keys: user-key,admin-key
+

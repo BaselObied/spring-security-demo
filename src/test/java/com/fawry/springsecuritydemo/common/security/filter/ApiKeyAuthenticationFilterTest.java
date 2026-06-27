@@ -1,6 +1,5 @@
 package com.fawry.springsecuritydemo.common.security.filter;
 
-import com.fawry.springsecuritydemo.common.exception.AuthenticationException;
 import com.fawry.springsecuritydemo.common.security.authentication.model.ApiKeyAuthentication;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
@@ -72,7 +72,8 @@ public class ApiKeyAuthenticationFilterTest {
                 .thenReturn(BAD_KEY);
 
         when(authenticationManager.authenticate(any(ApiKeyAuthentication.class)))
-                .thenThrow(new AuthenticationException("Invalid API key"));
+                .thenThrow(new AuthenticationException("Invalid API key") {
+                });
 
         // Act
         apiKeyAuthenticationFilter.doFilterInternal(request, response, filterChain);
