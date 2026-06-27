@@ -1,3 +1,6 @@
 spring:
   application:
     name: spring-security-demo
+
+auth:
+  keys: user-key,admin-key

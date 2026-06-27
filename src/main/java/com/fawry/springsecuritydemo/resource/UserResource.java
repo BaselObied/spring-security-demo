@@ -1,5 +1,6 @@
-package com.fawry.springsecuritydemo;
+package com.fawry.springsecuritydemo.resource;
 
+import com.fawry.springsecuritydemo.common.annotation.Authenticate;
 import com.fawry.springsecuritydemo.service.UserService;
 import com.fawry.springsecuritydemo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class UserResource {
     }
 
     @GetMapping
+    @Authenticate
     public List<User> findAllUsers() {
         return userService.getUsers();
     }
