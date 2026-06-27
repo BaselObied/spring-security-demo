@@ -22,7 +22,7 @@ public class UserResource {
     }
 
     @GetMapping
-    @PreAuthorize(value = "hasAuthority('ROLE_ADMIN')")
+//    @PreAuthorize(value = "hasAuthority('ROLE_ADMIN')")
     public List<User> findAllUsers() {
         return userService.getUsers();
     }
