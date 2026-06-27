@@ -1,3 +1,17 @@
 spring:
   application:
     name: spring-security-demo
+
+
+#  security:
+#    user:
+#      name: user
+#      password: user-password
+
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
