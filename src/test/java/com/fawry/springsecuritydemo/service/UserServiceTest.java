@@ -1,9 +1,8 @@
-package com.fawry.springsecuritydemo;
+package com.fawry.springsecuritydemo.service;
 
 import com.fawry.springsecuritydemo.model.User;
 import com.fawry.springsecuritydemo.model.enumeration.Role;
 import com.fawry.springsecuritydemo.repository.UserRepository;
-import com.fawry.springsecuritydemo.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

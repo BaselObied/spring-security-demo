@@ -1,4 +1,4 @@
-package com.fawry.springsecuritydemo;
+package com.fawry.springsecuritydemo.resource;
 
 import com.fawry.springsecuritydemo.service.UserService;
 import com.fawry.springsecuritydemo.model.User;
