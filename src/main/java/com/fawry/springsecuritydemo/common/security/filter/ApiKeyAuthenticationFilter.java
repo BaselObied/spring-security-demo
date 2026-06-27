@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -34,11 +35,12 @@ public class ApiKeyAuthenticationFilter extends OncePerRequestFilter {
         String apiKey = request.getHeader(AUTHORIZATION);
 
         try {
-            ApiKeyAuthentication authentication = new ApiKeyAuthentication(apiKey, true, List.of());
-            authenticationManager.authenticate(authentication);
+            ApiKeyAuthentication token = new ApiKeyAuthentication(apiKey, false, List.of());
+            Authentication authenticated = authenticationManager.authenticate(token);
+            SecurityContextHolder.getContext().setAuthentication(authenticated);
 
-            if (authentication.isAuthenticated()) {
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+            if (authenticated.isAuthenticated()) {
+                SecurityContextHolder.getContext().setAuthentication(authenticated);
             }
 
             filterChain.doFilter(request, response);
